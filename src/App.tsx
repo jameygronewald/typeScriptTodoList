@@ -23,6 +23,12 @@ function App(): JSX.Element {
     setTodos(newTodo);
   };
 
+  const completeTodo = (index: number): void => {
+    const newTodos: Todo[] = [...todos];
+    newTodos[index].isComplete = !newTodos[index].isComplete;
+    setTodos(newTodos);
+  };
+
   return (
     <>
       <h1>Todo List</h1>
@@ -36,7 +42,12 @@ function App(): JSX.Element {
       </form>
       <section>
         {todos.map((todo: Todo, index: number) => (
-          <div key={index}>{todo.text}</div>
+          <div key={index}>
+            <div style={{ textDecoration: todo.isComplete ? "line-through" : ''}}>{todo.text}</div>
+            <button type="button" onClick={() => completeTodo(index)}>
+              {todo.isComplete ? "Mark todo incomplete" : "Mark todo complete"}
+            </button>
+          </div>
         ))}
       </section>
     </>
