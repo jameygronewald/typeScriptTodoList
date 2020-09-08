@@ -31,8 +31,9 @@ function App(): JSX.Element {
 
   const removeTodo = (index: number): void => {
     const currentTodos: Todo[] = [...todos];
-    const updatedTodos: Todo[] = currentTodos.filter((todo: Todo, todoIndex: number) => todoIndex !== index);
-    setTodos(updatedTodos);
+    // const updatedTodos: Todo[] = currentTodos.filter((todo: Todo, todoIndex: number) => todoIndex !== index);
+    currentTodos.splice(index, 1);
+    setTodos(currentTodos);
   }
 
   return (
@@ -50,10 +51,10 @@ function App(): JSX.Element {
         {todos.map((todo: Todo, index: number) => (
           <div key={index}>
             <div style={{ textDecoration: todo.isComplete ? "line-through" : ''}}>{todo.text}</div>
-            <button type="button" onClick={() => completeTodo(index)}>
+            <button type="button" onClick={(): void => completeTodo(index)}>
               {todo.isComplete ? "Mark todo incomplete" : "Mark todo complete"}
             </button>
-            <button type="button" onClick={() => removeTodo(index)}>Remove todo</button>
+            <button type="button" onClick={(): void => removeTodo(index)}>Remove todo</button>
           </div>
         ))}
       </section>
