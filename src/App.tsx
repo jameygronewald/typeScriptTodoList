@@ -29,6 +29,12 @@ function App(): JSX.Element {
     setTodos(newTodos);
   };
 
+  const removeTodo = (index: number): void => {
+    const currentTodos: Todo[] = [...todos];
+    const updatedTodos: Todo[] = currentTodos.filter((todo: Todo, todoIndex: number) => todoIndex !== index);
+    setTodos(updatedTodos);
+  }
+
   return (
     <>
       <h1>Todo List</h1>
@@ -47,6 +53,7 @@ function App(): JSX.Element {
             <button type="button" onClick={() => completeTodo(index)}>
               {todo.isComplete ? "Mark todo incomplete" : "Mark todo complete"}
             </button>
+            <button type="button" onClick={() => removeTodo(index)}>Remove todo</button>
           </div>
         ))}
       </section>
